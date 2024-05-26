@@ -21,22 +21,23 @@ const Layout = ({ children }: Props) => {
   }, [isInView]);
 
   return (
-    <motion.div
-      ref={ref}
-      className="flex flex-col min-h-screen relative overflow-hidden"
-      variants={{
-        hidden: { opacity: 0, y: 20 },
-        visible: { opacity: 1, y: 0 },
-      }}
-      initial="hidden"
-      animate={mainControls}
-      transition={{ duration: 10, delay: 1 }}
-    >
-      <Header />
-      <Hero />
-      <div className="container mx-auto flex-1 py-10">{children}</div>
-      <Footer />
-    </motion.div>
+    <div ref={ref} className="relative overflow-hidden">
+      <motion.div
+        className="flex flex-col min-h-screen"
+        variants={{
+          hidden: { opacity: 0, y: 20 },
+          visible: { opacity: 1, y: 0 },
+        }}
+        initial="hidden"
+        animate={mainControls}
+        transition={{ duration: 3, delay: 0.5 }}
+      >
+        <Header />
+        <Hero />
+        <div className="container mx-auto flex-1 py-10">{children}</div>
+        <Footer />
+      </motion.div>
+    </div>
   );
 };
 
