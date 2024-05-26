@@ -2,7 +2,7 @@ import Footer from "@/components/Footer";
 import Header from "@/components/Header";
 import Hero from "@/components/Hero";
 import useIntro from "@/customHooks/useIntro";
-import { motion, useInView, useAnimate, useAnimation } from "framer-motion";
+import { motion, useInView, useAnimation } from "framer-motion";
 import { useEffect, useRef } from "react";
 
 type Props = {
