@@ -24,6 +24,15 @@ const UsernameMenu = () => {
             User Profile 🧑‍💼
           </Link>
         </DropdownMenuItem>
+
+        <DropdownMenuItem>
+          <Link
+            to="/manage-restaurant"
+            className="font-bold hover:text-orange-300"
+          >
+            Manage Restaurant 🍔
+          </Link>
+        </DropdownMenuItem>
         <Separator />
         <DropdownMenuItem>
           <Button
