@@ -13,16 +13,24 @@ import {
 import { Input } from "@/components/ui/input";
 import LoadingButton from "@/components/LoadingButton";
 import { Button } from "@/components/ui/button";
+import { User } from "@/utils/Types";
+import { useEffect } from "react";
 
 type Props = {
   onSave: (userProfileData: UserFormData) => void;
   isLoading: boolean;
+  currentUser: User;
 };
 
-const UserProfileForm = ({ onSave, isLoading }: Props) => {
+const UserProfileForm = ({ onSave, isLoading, currentUser }: Props) => {
   const form = useForm<UserFormData>({
     resolver: zodResolver(formSchema),
+    defaultValues: currentUser,
   });
+
+  useEffect(() => {
+    form.reset(currentUser);
+  }, [currentUser, form]);
 
   return (
     <Form {...form}>
@@ -53,7 +61,7 @@ const UserProfileForm = ({ onSave, isLoading }: Props) => {
         <FormField
           control={form.control}
           name="name"
-          render={({ field, fieldState }) => (
+          render={({ field }) => (
             <FormItem>
               <FormLabel>Name</FormLabel>
               <FormControl>
