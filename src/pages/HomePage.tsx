@@ -1,13 +1,23 @@
 import landingImage from "../assets/landing.png";
 import appDownloadImage from "../assets/appDownload.png";
 import { motion } from "framer-motion";
+import SearchBar from "@/components/SearchBar";
+import { SearchFormData } from "@/utils/ZodSchemas";
+import { useNavigate } from "react-router-dom";
 
 export default function HomePage() {
   const text2 = "Food is just a click away with Foody.".split(" ");
   const text3 = "Order food online even faster with Foody's App.".split(" ");
+  const navigate = useNavigate();
+
+  const handleSearchSubmit = (data: SearchFormData) => {
+    navigate({
+      pathname: `/search/${data.searchQuery}`,
+    });
+  };
   return (
     <div className="flex flex-col gap-12">
-      <div className="bg-white rounded-lg shadow-md py-8 flex flex-col gap-5 text-center -mt-16">
+      <div className=" md:px-32 bg-white rounded-lg shadow-md py-8 flex flex-col gap-5 text-center -mt-16">
         <h1 className="text-5xl font-bold tracking-tight text-orange-300">
           Food in a takeway today
         </h1>
@@ -26,6 +36,10 @@ export default function HomePage() {
             </motion.span>
           ))}
         </motion.div>
+        <SearchBar
+          placeHolder="Search for restaurants"
+          onSubmit={handleSearchSubmit}
+        />
       </div>
       <div className="grid md:grid-cols-2 gap-5">
         <img src={landingImage} />

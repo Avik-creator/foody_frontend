@@ -43,6 +43,14 @@ export const restaurantformSchema = z
     path: ["imageFile"],
   });
 
+export const searchSchema = z.object({
+  searchQuery: z
+    .string({ required_error: "Restaurant Name is Required" })
+    .min(1, { message: "Search query is required" }),
+});
+
+export type SearchFormData = z.infer<typeof searchSchema>;
+
 export type RestaurantFormData = z.infer<typeof restaurantformSchema>;
 
 export type UserFormData = z.infer<typeof formSchema>;
