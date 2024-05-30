@@ -5,11 +5,12 @@ const API_BASE_URL = import.meta.env.VITE_API_BASE_URL!;
 
 export const useSearchRestaurants = (
   searchState: SearchState,
-  city?: string,
+  city?: string
 ) => {
   const createSearchRequest = async (): Promise<RestaurantSearchResult> => {
     const params = new URLSearchParams();
     params.set("searchQuery", searchState.searchQuery);
+    params.set("page", searchState.page.toString());
     const response = await fetch(
       `${API_BASE_URL}/api/restaurant/search/${city}?${params.toString()}`,
       {
@@ -17,7 +18,7 @@ export const useSearchRestaurants = (
         headers: {
           "Content-Type": "application/json",
         },
-      },
+      }
     );
 
     if (!response.ok) {

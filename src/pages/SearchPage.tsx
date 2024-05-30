@@ -7,6 +7,7 @@ import { SearchState } from "@/utils/Types";
 import { useState } from "react";
 import SearchBar from "@/components/SearchBar";
 import { SearchFormData } from "@/utils/ZodSchemas";
+import PaginationSelector from "@/components/PaginationSelector";
 
 const SearchPage = () => {
   const navigate = useNavigate();
@@ -14,11 +15,19 @@ const SearchPage = () => {
 
   const [searchState, setSearchState] = useState<SearchState>({
     searchQuery: "",
+    page: 1,
   });
   const { results, isLoading, error } = useSearchRestaurants(
     searchState,
     city!
   );
+
+  const setPage = (page: number) => {
+    setSearchState((prevState) => ({
+      ...prevState,
+      page: page,
+    }));
+  };
 
   const setSearchQuery = (searchQuery: SearchFormData) => {
     setSearchState((prevState) => ({
@@ -30,6 +39,7 @@ const SearchPage = () => {
   const resetSearch = () => {
     setSearchState({
       searchQuery: "",
+      page: 1,
     });
   };
 
@@ -61,6 +71,12 @@ const SearchPage = () => {
         {results?.data.map((restaurant) => (
           <SearchResultCard key={restaurant._id} restaurant={restaurant} />
         ))}
+
+        <PaginationSelector
+          page={results?.pagination.page!}
+          pages={results?.pagination.pages!}
+          onPageChange={setPage}
+        />
       </div>
     </div>
   );

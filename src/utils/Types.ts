@@ -49,4 +49,5 @@ export type RestaurantSearchResult = {
 
 export type SearchState = {
   searchQuery: string;
+  page: number;
 };
