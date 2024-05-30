@@ -6,6 +6,7 @@ import UserProfilePage from "./pages/UserProfilePage";
 import ProtectedRoute from "./auth/ProtectedRoute";
 import ManageRestaurantPage from "./pages/ManageRestaurantPage";
 import SearchPage from "./pages/SearchPage";
+import NotFoundPage from "./pages/NotFoundPage";
 
 export const AppRoutes = () => {
   return (
@@ -15,6 +16,15 @@ export const AppRoutes = () => {
         element={
           <Layout showHero={true}>
             <HomePage />
+          </Layout>
+        }
+      />
+
+      <Route
+        path="/404"
+        element={
+          <Layout showHero={false}>
+            <NotFoundPage />
           </Layout>
         }
       />

@@ -5,17 +5,26 @@ import { Form, FormControl, FormField, FormItem } from "./ui/form";
 import { Search } from "lucide-react";
 import { Input } from "./ui/input";
 import { Button } from "./ui/button";
+import { useEffect } from "react";
 
 type Props = {
   onSubmit: (formData: SearchFormData) => void;
   placeHolder: string;
   onReset?: () => void;
+  searchQuery: string;
 };
 
-const SearchBar = ({ onSubmit, onReset, placeHolder }: Props) => {
+const SearchBar = ({ onSubmit, onReset, placeHolder, searchQuery }: Props) => {
   const form = useForm<SearchFormData>({
     resolver: zodResolver(searchSchema),
+    defaultValues: {
+      searchQuery,
+    },
   });
+
+  useEffect(() => {
+    form.reset({ searchQuery });
+  }, [searchQuery, form]);
 
   const handleReset = () => {
     form.reset({
@@ -49,16 +58,14 @@ const SearchBar = ({ onSubmit, onReset, placeHolder }: Props) => {
           )}
         />
 
-        {form.formState.isDirty && (
-          <Button
-            onClick={handleReset}
-            type="button"
-            variant={"outline"}
-            className="rounded-full"
-          >
-            Clear
-          </Button>
-        )}
+        <Button
+          onClick={handleReset}
+          type="button"
+          variant={"outline"}
+          className="rounded-full"
+        >
+          Reset
+        </Button>
 
         <Button type="submit" className="rounded-full bg-orange-300">
           Search
