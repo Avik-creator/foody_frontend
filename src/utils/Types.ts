@@ -61,3 +61,27 @@ export type CartItem = {
   price: number;
   quantity: number;
 };
+
+export type CheckoutSessionRequest = {
+  cartItems: {
+    menuItemId: string;
+    name: string;
+    quantity: string;
+  }[];
+  deliveryDetails: {
+    email: string;
+    name: string;
+    addressLine1: string;
+    city: string;
+  };
+  restaurantId: string;
+};
+
+export type RazorPayCheckoutSession = {
+  order: {
+    amount: number;
+    currency: string;
+    id: string;
+    entity: string;
+  };
+};

@@ -10,9 +10,11 @@ import { UserFormData } from "@/utils/ZodSchemas";
 type Props = {
   onCheckout: (userProfileData: UserFormData) => void;
   disabled: boolean;
+  title: string;
+  isLoading: boolean;
 };
 
-const CheckoutButton = ({ onCheckout, disabled }: Props) => {
+const CheckoutButton = ({ onCheckout, disabled, title, isLoading }: Props) => {
   const {
     isAuthenticated,
     isLoading: isAuthLoading,
@@ -38,15 +40,15 @@ const CheckoutButton = ({ onCheckout, disabled }: Props) => {
     );
   }
 
-  if (isAuthLoading) {
+  if (isAuthLoading || !currentUser || isLoading) {
     return <LoadingButton />;
   }
 
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button disabled={disabled} className="bg-orange-500 flex-1">
-          Go to checkout
+        <Button disabled={disabled} className="bg-orange-300 flex-1">
+          {title}
         </Button>
       </DialogTrigger>
       <DialogContent className="max-w-[425px] md:min-w-[700px] bg-gray-50">
