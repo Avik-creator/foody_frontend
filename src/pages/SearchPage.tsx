@@ -9,6 +9,7 @@ import SearchBar from "@/components/SearchBar";
 import { SearchFormData } from "@/utils/ZodSchemas";
 import PaginationSelector from "@/components/PaginationSelector";
 import CuisineFilter from "@/components/CuisineFilter";
+import SortOptionDropdown from "@/components/SortOptionDropDown";
 
 const SearchPage = () => {
   const navigate = useNavigate();
@@ -18,6 +19,7 @@ const SearchPage = () => {
     searchQuery: "",
     page: 1,
     selectedCuisines: [],
+    sortOption: "bestMatch",
   });
   const { results, isLoading, error } = useSearchRestaurants(
     searchState,
@@ -53,7 +55,15 @@ const SearchPage = () => {
       searchQuery: "",
       page: 1,
       selectedCuisines: [],
+      sortOption: "bestMatch",
     });
+  };
+
+  const setSortOption = (sortOption: string) => {
+    setSearchState((prevState) => ({
+      ...prevState,
+      sortOption,
+    }));
   };
 
   if (isLoading) {
@@ -83,13 +93,20 @@ const SearchPage = () => {
         />
       </div>
       <div id="main-content" className="flex flex-col gap-5">
-        <SearchResultInfo total={results?.pagination.total!} city={city!} />
         <SearchBar
           onSubmit={setSearchQuery}
           placeHolder="Search By Cuisine or Restaurant Name"
           onReset={resetSearch}
           searchQuery={searchState.searchQuery}
         />
+
+        <div className="flex justify-between flex-col gap-3 lg:flex-row">
+          <SearchResultInfo total={results?.pagination.total!} city={city!} />
+          <SortOptionDropdown
+            sortOption={searchState.sortOption}
+            onChange={(value) => setSortOption(value)}
+          />
+        </div>
         {results?.data.map((restaurant) => (
           <SearchResultCard key={restaurant._id} restaurant={restaurant} />
         ))}
