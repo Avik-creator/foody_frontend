@@ -36,6 +36,7 @@ export type Restaurant = {
 export type MenuItem = {
   name: string;
   price: number;
+  _id: string;
 };
 
 export type RestaurantSearchResult = {
@@ -52,4 +53,11 @@ export type SearchState = {
   page: number;
   selectedCuisines: string[];
   sortOption: string;
+};
+
+export type CartItem = {
+  _id: string;
+  name: string;
+  price: number;
+  quantity: number;
 };
