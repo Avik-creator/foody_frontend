@@ -1,12 +1,13 @@
 import UserProfileFormSkeleton from "@/Skeletons/UserProfileFormSkeleton";
 import { useGetRestaurant } from "@/api/RestaurantAPI";
+import CheckoutButton from "@/components/CheckoutButton";
 import MenuItem from "@/components/MenuItem";
 import OrderSummary from "@/components/OrderSummary";
 import RestaurantInfo from "@/components/RestaurantInfo";
 import { AspectRatio } from "@/components/ui/aspect-ratio";
-import { Button } from "@/components/ui/button";
 import { Card, CardFooter } from "@/components/ui/card";
 import { CartItem, MenuItem as MenuItemType } from "@/utils/Types";
+import { UserFormData } from "@/utils/ZodSchemas";
 import { useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 
@@ -15,7 +16,14 @@ const DetailPage = () => {
   const navigate = useNavigate();
   const { error, restaurant, isLoading } = useGetRestaurant(restaurantId);
 
-  const [cartItems, setCartItems] = useState<CartItem[]>([]);
+  const [cartItems, setCartItems] = useState<CartItem[]>(() => {
+    const cartItems = sessionStorage.getItem(`cartItems-${restaurantId}`);
+    return cartItems ? JSON.parse(cartItems) : [];
+  });
+
+  const onCheckOut = (userFormData: UserFormData) => {
+    console.log("User Data", userFormData);
+  };
 
   const addToCart = (menuItem: MenuItemType) => {
     setCartItems((prevCartItems) => {
@@ -100,7 +108,10 @@ const DetailPage = () => {
               removeFromCart={removeFromCart}
             />
             <CardFooter>
-              <Button>Checkout</Button>
+              <CheckoutButton
+                disabled={cartItems.length === 0}
+                onCheckout={onCheckOut}
+              />
             </CardFooter>
           </Card>
         </div>
