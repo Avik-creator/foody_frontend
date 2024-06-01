@@ -146,7 +146,6 @@ const DetailPage = () => {
       name: "Foody",
       description: "Payment for food items",
       order_id: order.order.id,
-      image: "",
       callback_url:
         "http://localhost:3000/api/order/checkout/razorpay/verfiy-signature",
       redirect: true,
