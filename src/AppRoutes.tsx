@@ -8,6 +8,7 @@ import ManageRestaurantPage from "./pages/ManageRestaurantPage";
 import SearchPage from "./pages/SearchPage";
 import NotFoundPage from "./pages/NotFoundPage";
 import DetailPage from "./pages/DetailPage";
+import OrderStatusPage from "./pages/OrderStatusPage";
 
 export const AppRoutes = () => {
   return (
@@ -53,6 +54,15 @@ export const AppRoutes = () => {
           element={
             <Layout showHero={false}>
               <UserProfilePage />{" "}
+            </Layout>
+          }
+        />
+
+        <Route
+          path="/order-status"
+          element={
+            <Layout>
+              <OrderStatusPage />
             </Layout>
           }
         />
