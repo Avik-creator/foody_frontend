@@ -1,4 +1,3 @@
-import UserProfileFormSkeleton from "@/Skeletons/UserProfileFormSkeleton";
 import { useSearchRestaurants } from "@/api/RestaurantAPI";
 import SearchResultCard from "@/components/SearchResultCard";
 import SearchResultInfo from "@/components/SearchResultInfo";
