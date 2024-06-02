@@ -107,13 +107,13 @@ export const useGetMyOrders = () => {
     return response.json();
   };
 
-  const { data: orders, isLoading } = useQuery(
-    "fetchMyOrders",
-    getMyOrdersRequest,
-    {
-      refetchInterval: 5000,
-    }
-  );
+  const {
+    data: orders,
+    isLoading,
+    error,
+  } = useQuery("fetchMyOrders", getMyOrdersRequest, {
+    refetchInterval: 5000,
+  });
 
-  return { orders, isLoading };
+  return { orders, isLoading, error };
 };

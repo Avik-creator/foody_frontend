@@ -6,18 +6,25 @@ import { AspectRatio } from "@/components/ui/aspect-ratio";
 import { useNavigate } from "react-router";
 
 const OrderStatusPage = () => {
-  const { orders, isLoading } = useGetMyOrders();
+  const { orders, isLoading, error } = useGetMyOrders();
   const navigate = useNavigate();
 
   if (isLoading) {
     return <OrderStatusSkeleton />;
   }
 
-  if (!orders || orders.length === 0) {
+  if (error) {
     navigate("/404");
   }
 
-  console.log(orders);
+  if (!orders || orders?.length === 0) {
+    return (
+      <div className="text-center">
+        <h1 className="text-2xl font-bold">No orders yet</h1>
+        <p className="text-gray-500">You don't have any orders yet.</p>
+      </div>
+    );
+  }
 
   return (
     <div className="space-y-10">
