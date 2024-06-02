@@ -1,3 +1,4 @@
+import DetailPageSkeleton from "@/Skeletons/DetailPageSkeleton";
 import UserProfileFormSkeleton from "@/Skeletons/UserProfileFormSkeleton";
 import {
   CreateRazorPayCheckoutSession,
@@ -112,7 +113,7 @@ const DetailPage = () => {
   };
 
   if (isLoading) {
-    return <UserProfileFormSkeleton />;
+    return <DetailPageSkeleton />;
   }
 
   if (error) {

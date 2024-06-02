@@ -10,6 +10,7 @@ import { SearchFormData } from "@/utils/ZodSchemas";
 import PaginationSelector from "@/components/PaginationSelector";
 import CuisineFilter from "@/components/CuisineFilter";
 import SortOptionDropdown from "@/components/SortOptionDropDown";
+import SearchPageSkeleton from "@/Skeletons/SearchPageSkeleton";
 
 const SearchPage = () => {
   const navigate = useNavigate();
@@ -67,13 +68,7 @@ const SearchPage = () => {
   };
 
   if (isLoading) {
-    return (
-      <div className="flex items-center justify-center min-h-screen">
-        <div className="w-full max-w-4xl">
-          <UserProfileFormSkeleton />
-        </div>
-      </div>
-    );
+    return <SearchPageSkeleton />;
   }
 
   if (error) {

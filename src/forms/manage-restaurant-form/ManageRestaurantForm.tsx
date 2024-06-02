@@ -11,6 +11,7 @@ import LoadingButton from "@/components/LoadingButton";
 import { Button } from "@/components/ui/button";
 import { Restaurant } from "@/utils/Types";
 import { useEffect } from "react";
+import ManageRestaurantFormSkeleton from "@/Skeletons/ManageRestaurantFormSkeleton";
 
 type Props = {
   onSave: (restaurantFormData: FormData) => void;
@@ -79,6 +80,10 @@ const ManageRestaurantForm = ({ onSave, isLoading, restaurant }: Props) => {
 
     onSave(formData);
   };
+
+  if (isLoading) {
+    return <ManageRestaurantFormSkeleton />;
+  }
 
   return (
     <Form {...form}>
