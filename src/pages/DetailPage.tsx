@@ -1,5 +1,4 @@
 import DetailPageSkeleton from "@/Skeletons/DetailPageSkeleton";
-import UserProfileFormSkeleton from "@/Skeletons/UserProfileFormSkeleton";
 import {
   CreateRazorPayCheckoutSession,
   CreateStripeCheckoutSession,
@@ -23,6 +22,7 @@ declare global {
 }
 
 const key = import.meta.env.VITE_RAZORPAY_KEY_ID!;
+const VITE_BACKEND_URL = import.meta.env.VITE_API_BASE_URL!;
 
 const DetailPage = () => {
   const { restaurantId } = useParams();
@@ -147,8 +147,7 @@ const DetailPage = () => {
       name: "Foody",
       description: "Payment for food items",
       order_id: order.order.id,
-      callback_url:
-        "http://localhost:3000/api/order/checkout/razorpay/verfiy-signature",
+      callback_url: `${VITE_BACKEND_URL}/api/order/checkout/razorpay/verfiy-signature`,
       redirect: true,
       prefill: {
         name: userFormData.name,
