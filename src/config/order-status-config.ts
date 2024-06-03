@@ -16,4 +16,5 @@ export const ORDER_STATUS: OrderStatusInfo[] = [
   { label: "In Progress", value: "inProgress", progressValue: 50 },
   { label: "Out for Delivery", value: "outForDelivery", progressValue: 75 },
   { label: "Delivered", value: "delivered", progressValue: 100 },
+  { label: "Failed", value: "failed", progressValue: 100 },
 ];

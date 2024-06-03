@@ -112,4 +112,5 @@ export type OrderStatus =
   | "paid"
   | "inProgress"
   | "outForDelivery"
-  | "delivered";
+  | "delivered"
+  | "failed";
