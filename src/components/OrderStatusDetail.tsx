@@ -28,7 +28,7 @@ const OrderStatusDetail = ({ order }: Props) => {
       <Separator />
       <div className="flex flex-col">
         <span className="font-bold">Total</span>
-        <span>Rs {order.totalAmount.toFixed(2)}</span>
+        <span>Rs {order ? order.totalAmount.toFixed(2) : 0}</span>
       </div>
     </div>
   );
